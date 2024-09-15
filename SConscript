@@ -5,9 +5,11 @@ src   = []
 cwd   = GetCurrentDir()
 
 # add lps22hb src files.
-src += Glob('sensor_st_lps22hb.c')
 src += Glob('libraries/lps22hb.c')
 src += Glob('libraries/lps22hb_reg.c')
+
+if GetDepend('PKG_LPS22HB_USING_SENSOR_V1'):
+    src += Glob('st_lps22hb_sensor_v1.c')
 
 # add lps22hb include path.
 path  = [cwd, cwd + '/libraries']
