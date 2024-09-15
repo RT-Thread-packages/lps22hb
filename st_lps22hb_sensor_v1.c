@@ -1,5 +1,5 @@
 
-#include "sensor_st_lps22hb.h"
+#include "st_lps22hb_sensor_v1.h"
 
 #define DBG_ENABLE
 #define DBG_LEVEL DBG_LOG
@@ -20,7 +20,7 @@ static int32_t lps22hb_get_tick(void)
     return rt_tick_get();
 }
 
-static int rt_i2c_write_reg(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t len)
+static int32_t rt_i2c_write_reg(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t len)
 {
     rt_uint8_t tmp = reg;
     struct rt_i2c_msg msgs[2];
@@ -43,7 +43,7 @@ static int rt_i2c_write_reg(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t
     return RT_EOK;
 }
 
-static int rt_i2c_read_reg(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t len)
+static int32_t rt_i2c_read_reg(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t len)
 {
     rt_uint8_t tmp = reg;
     struct rt_i2c_msg msgs[2];
@@ -261,7 +261,7 @@ static rt_err_t _lps22hb_baro_init(struct rt_sensor_intf *intf)
 
     return RT_EOK;
 }
-static rt_size_t lps22hb_fetch_data(struct rt_sensor_device *sensor, void *buf, rt_size_t len)
+static RT_SIZE_TYPE lps22hb_fetch_data(struct rt_sensor_device *sensor, void *buf, rt_size_t len)
 {
     if (sensor->config.mode == RT_SENSOR_MODE_POLLING)
     {
